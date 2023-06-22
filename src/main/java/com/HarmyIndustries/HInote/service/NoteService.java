@@ -32,7 +32,7 @@ public class NoteService {
     }
 
     public Note updateNote(Note noteToBeUpdated, Note updatedNote){
-        BeanUtils.copyProperties(updatedNote,noteToBeUpdated);
+        BeanUtils.copyProperties(updatedNote,noteToBeUpdated, "id");
         return noteRepository.save(noteToBeUpdated);
     }
 

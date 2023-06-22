@@ -3,6 +3,7 @@ package com.HarmyIndustries.HInote.controller;
 import com.HarmyIndustries.HInote.model.Note;
 import com.HarmyIndustries.HInote.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,31 +16,37 @@ public class NoteController {
     private NoteService noteService;
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('users:read')")
     public List<Note> getAllNotes() {
         return noteService.getAllNotes();
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('users:read')")
     public Note getCertainNote(@PathVariable("id") Note note) {
         return note;
     }
 
     @PostMapping("/findByTag")
+    @PreAuthorize("hasAuthority('users:read')")
     public List<Note> getNotesByTag(@RequestParam String filter) {
         return noteService.findByTag(filter);
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasAuthority('users:read')")
     public Note createNote(@RequestBody Note note){
         return noteService.createNote(note);
     }
 
     @PutMapping("/{id}/update")
+    @PreAuthorize("hasAuthority('users:read')")
     public Note updateNote(@PathVariable("id")Note noteToBeUpdated, @RequestBody Note updatedNote){
         return noteService.updateNote(noteToBeUpdated,updatedNote);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('users:read')")
     public void deleteNote(@PathVariable("id")Note note){
         noteService.deleteNote(note);
     }
