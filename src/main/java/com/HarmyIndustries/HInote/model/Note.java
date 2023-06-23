@@ -1,9 +1,6 @@
 package com.HarmyIndustries.HInote.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -16,6 +13,9 @@ public class Note {
     private String text;
     private String tag;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User author;
 
     public Note() {
     }

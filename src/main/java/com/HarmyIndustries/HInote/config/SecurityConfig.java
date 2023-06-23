@@ -10,14 +10,13 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
                 .authorizeRequests(auth -> {
-                    auth.requestMatchers("/").permitAll();
+                    auth.requestMatchers("/").hasAuthority("users:read");
                     auth.anyRequest().authenticated();
                 })
                 .oauth2Login(Customizer.withDefaults())

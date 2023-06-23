@@ -2,6 +2,7 @@ package com.HarmyIndustries.HInote.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    @OneToMany
+    @JoinColumn(name = "note_id")
+    private List<Note> favorites;
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -33,6 +38,18 @@ public class User {
         this.locale = locale;
         this.email = email;
         this.gender = gender;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public List<Note> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Note> favorites) {
+        this.favorites = favorites;
     }
 
     public String getId() {
